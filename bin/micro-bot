@@ -1,0 +1,80 @@
+#!/usr/bin/env node
+
+const start = require('../')
+const parse = require('minimist')
+const { resolve } = require('path')
+
+const help = () => {
+  console.log(`Usage: micro-bot [opts] <file>
+  -t  Bot token
+  -d  Webhook domain name
+  -H  Webhook host             [0.0.0.0]
+  -p  Webhook port             [3000]
+  -h  Show this help message`)
+}
+
+const args = parse(process.argv, {
+  alias: {
+    t: 'token',
+    d: 'domain',
+    H: 'host',
+    h: 'help',
+    p: 'port'
+  },
+  boolean: ['h'],
+  default: {
+    H: '0.0.0.0',
+    p: 3000
+  }
+})
+
+if (args.help) {
+  help()
+  process.exit(0)
+}
+const token = args.token || process.env.BOT_TOKEN
+const domain = args.domain || process.env.BOT_DOMAIN
+if (!token) {
+  console.error(`micro-bot: Please supply Bot token`)
+  help()
+  process.exit(1)
+}
+
+let [,, file] = args._
+
+if (!file) {
+  try {
+    const packageJson = require(resolve(process.cwd(), 'package.json'))
+    file = packageJson.main || 'index.js'
+  } catch (err) {
+    if (err.code === 'MODULE_NOT_FOUND') {
+      console.error(`micro-bot: Could not read \`package.json\`: ${err.message}`)
+      process.exit(1)
+    }
+  }
+}
+
+if (!file) {
+  console.error('micro-bot: Please supply a file.')
+  help()
+  process.exit(1)
+}
+
+if (file[0] !== '/') {
+  file = resolve(process.cwd(), file)
+}
+
+require('async-to-gen/register')
+
+let handler
+
+try {
+  handler = require(file)
+} catch (err) {
+  console.error(`micro-bot: Error when importing ${file}: ${err.stack}`)
+  process.exit(1)
+}
+
+start(token, handler, domain, args.port, args.host).catch((err) => {
+  console.log(`micro-bot: Failed to start bot: ${err.stack}`)
+})
