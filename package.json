@@ -1,6 +1,6 @@
 {
   "name": "micro-bot",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Async Telegram microbots",
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
