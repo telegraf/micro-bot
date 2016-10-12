@@ -10,7 +10,7 @@ function start (token, handler, domain, port, host) {
   const secret = Math.random().toString(36)
   return bot.telegram.getMe()
     .then((botInfo) => {
-      console.log(`> Starting ${botInfo.username}...`)
+      console.log(`Starting ${botInfo.username}...`)
       if (typeof domain !== 'string') {
         return bot.telegram.removeWebHook().then(() => bot.startPolling())
       }
@@ -21,7 +21,7 @@ function start (token, handler, domain, port, host) {
         .then(() => bot.startWebHook(`/${secret}`, null, port, host))
     })
     .then(() => {
-      console.log('> Bot started')
+      console.log('Bot started')
     })
 }
 
