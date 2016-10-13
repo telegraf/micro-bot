@@ -32,7 +32,7 @@ $ micro-bot -t %token% -d yourdoimain.tld -p 3000 -H localhost echo.js
 
 **Note: micro-bot supports only http webhooks**
 
-Also you can provide options vie environmant variables:
+Also you can provide options via environment variables:
 
 * `process.env.BOT_TOKEN` - Bot token
 * `process.env.BOT_DOMAIN` - Webhook domain

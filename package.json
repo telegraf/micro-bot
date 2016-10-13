@@ -12,7 +12,6 @@
   "bugs": {
     "url": "https://github.com/telegraf/micro-bot/issues"
   },
-  "main": "index.js",
   "scripts": {
     "test": "eslint . && ava test"
   },
@@ -25,7 +24,7 @@
   "dependencies": {
     "async-to-gen": "^1.1.4",
     "minimist": "^1.2.0",
-    "telegraf": "^3.2.0"
+    "telegraf": "^3.2.1"
   },
   "devDependencies": {
     "ava": "^0.16.0",
