@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const start = require('../')
+const { start } = require('../')
 const parse = require('minimist')
 const { resolve } = require('path')
 

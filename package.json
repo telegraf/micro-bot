@@ -1,6 +1,6 @@
 {
   "name": "micro-bot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Async Telegram microbots",
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
@@ -12,6 +12,7 @@
   "bugs": {
     "url": "https://github.com/telegraf/micro-bot/issues"
   },
+  "main": "index.js",
   "scripts": {
     "test": "eslint . && ava test"
   },

@@ -25,4 +25,5 @@ function start (token, handler, domain, port, host) {
     })
 }
 
-module.exports = start
+module.exports = Telegraf
+module.exports.start = start
