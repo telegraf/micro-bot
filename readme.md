@@ -24,10 +24,10 @@ To run the bot, use the `micro-bot` command:
 $ micro-bot -t %token% echo.js
 ```
 
-To run the bot with webhook support, provide webhook server url:
+To run the bot with webhook support, provide webhook domain name:
 
 ```bash
-$ micro-bot -t %token% -d yourdoimain.tld -p 3000 -H localhost echo.js
+$ micro-bot -t %token% -d yourdoimain.tld echo.js
 ```
 
 **Note: micro-bot supports only http webhooks**
@@ -86,13 +86,13 @@ If you want to do it manually, you can! `micro-bot` is idempotent and should not
 ### Advanced Examples
 
 ```js
-const { mount } = require('telegraf')
+const { mount } = require('micro-bot')
 
 module.exports = mount('sticker', (ctx) => ctx.reply('👍'))
 ```
 
 ```js
-const { Composer } = require('telegraf')
+const { Composer } = require('micro-bot')
 const app = new Composer()
 
 app.command('/start', async (ctx) => ctx.reply('Welcome!'))
