@@ -18,7 +18,7 @@ function start (token, handler, domain, port, host) {
       if (domain.startsWith('https://')) {
         domain = url.parse(domain).host
       }
-      bot.startWebHook(`/${secret}`, null, port, host, handler.cb)
+      bot.startWebHook(`/${secret}`, null, port, host, handler.httpCallback)
       return bot.telegram.setWebHook(`https://${domain}/${secret}`)
     })
     .then(() => console.log('Bot started'))

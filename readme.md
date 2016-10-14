@@ -4,7 +4,7 @@
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 
 # micro-bot
-> Async Telegram microbots
+> 🤖 Async Telegram microbots
 
 > `micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/) 
 
@@ -21,13 +21,13 @@ module.exports = async function (ctx) {
 To run the bot, use the `micro-bot` command:
 
 ```bash
-$ micro-bot -t %token% echo.js
+$ micro-bot -t TOKEN echo.js
 ```
 
 To run the bot with webhook support, provide webhook domain name:
 
 ```bash
-$ micro-bot -t %token% -d yourdoimain.tld echo.js
+$ micro-bot -t TOKEN -d yourdoimain.tld echo.js
 ```
 
 **Note: micro-bot supports only http webhooks**
@@ -38,7 +38,7 @@ Also you can provide options via environment variables:
 * `process.env.BOT_DOMAIN` - Webhook domain
 
 ```bash
-$ BOT_TOKEN='%token%' micro-bot echo.js
+$ BOT_TOKEN='TOKEN' micro-bot echo.js
 ```
 
 ## Documentation
@@ -117,7 +117,7 @@ First, change your `package.json` as in following snippet:
 then use `now` to deploy:
 
 ```bash
-$ now -e BOT_TOKEN='%token%'
+$ now -e BOT_TOKEN='TOKEN'
 ```
 
-Congratulations, your bot is alive!
+Congratulations, your bot is alive! 🎉
