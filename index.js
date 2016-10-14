@@ -11,19 +11,17 @@ function start (token, handler, domain, port, host) {
   return bot.telegram.getMe()
     .then((botInfo) => {
       console.log(`Starting ${botInfo.username}...`)
+      bot.options.username = botInfo.username
       if (typeof domain !== 'string') {
         return bot.telegram.removeWebHook().then(() => bot.startPolling())
       }
       if (domain.startsWith('https://')) {
         domain = url.parse(domain).host
       }
+      bot.startWebHook(`/${secret}`, null, port, host, handler.cb)
       return bot.telegram.setWebHook(`https://${domain}/${secret}`)
-        .then(() => bot.startWebHook(`/${secret}`, null, port, host, handler.cb))
     })
-    .then(() => {
-      console.log('Bot started')
-    })
+    .then(() => console.log('Bot started'))
 }
 
-module.exports = Telegraf
-module.exports.start = start
+module.exports = Object.assign(Telegraf, {start: start})
