@@ -76,6 +76,6 @@ try {
   process.exit(1)
 }
 
-start(token, handler, domain, args.port, args.host).catch((err) => {
+start(token, handler, domain, args.port, args.host, handler.httpCallback).catch((err) => {
   console.log(`micro-bot: Failed to start bot: ${err.stack}`)
 })

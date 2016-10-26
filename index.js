@@ -1,13 +1,12 @@
 const Telegraf = require('telegraf')
 const url = require('url')
 
-function start (token, handler, domain, port, host) {
+function start (token, handler, domain, port, host, httpCallback) {
   const bot = new Telegraf(token)
   bot.catch((err) => {
     console.log(`micro-bot: Error when processing update: ${err.stack}`)
   })
   bot.use(handler)
-  const secret = Math.random().toString(36)
   return bot.telegram.getMe()
     .then((botInfo) => {
       console.log(`Starting ${botInfo.username}...`)
@@ -18,7 +17,8 @@ function start (token, handler, domain, port, host) {
       if (domain.startsWith('https://')) {
         domain = url.parse(domain).host
       }
-      bot.startWebHook(`/${secret}`, null, port, host, handler.httpCallback)
+      const secret = Math.random().toString(36).slice(2)
+      bot.startWebHook(`/${secret}`, null, port, host, httpCallback)
       return bot.telegram.setWebHook(`https://${domain}/${secret}`)
     })
     .then(() => console.log('Bot started'))
