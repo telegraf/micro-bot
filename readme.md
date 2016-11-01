@@ -121,3 +121,8 @@ $ now -e BOT_TOKEN='TOKEN'
 ```
 
 Congratulations, your bot is alive! 🎉
+
+#### Example bots
+
+[@uncover_bot](https://telegram.me/uncover_bot) — [Source code](https://uncover.now.sh/_src)
+[@epub2mobi_bot](https://telegram.me/epub2mobi_bot) — [Source code](https://epub2mobi.now.sh/_src)
