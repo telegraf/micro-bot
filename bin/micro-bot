@@ -77,5 +77,5 @@ try {
 }
 
 start(token, handler, domain, args.port, args.host, handler.httpCallback).catch((err) => {
-  console.log(`micro-bot: Failed to start bot: ${err.stack}`)
+  console.log(`micro-bot: Failed to start bot: ${err}`)
 })

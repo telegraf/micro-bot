@@ -4,7 +4,7 @@ const url = require('url')
 function start (token, handler, domain, port, host, httpCallback) {
   const bot = new Telegraf(token)
   bot.catch((err) => {
-    console.log(`micro-bot: Error when processing update: ${err.stack}`)
+    console.log(`micro-bot: Error when processing update: ${err}`)
   })
   bot.use(handler)
   return bot.telegram.getMe()
