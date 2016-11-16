@@ -8,9 +8,9 @@ const help = () => {
   console.log(`Usage: micro-bot [opts] <file>
 
   -t  Bot token
-  -d  Webhook domain name
-  -H  Webhook host             [0.0.0.0]
-  -p  Webhook port             [3000]
+  -d  Webhook domain
+  -H  Webhook host [0.0.0.0]
+  -p  Webhook port [3000]
   -h  Show this help message`)
 }
 
