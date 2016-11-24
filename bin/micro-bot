@@ -1,8 +1,13 @@
 #!/usr/bin/env node
 
 const { start } = require('../')
-const parse = require('minimist')
 const { resolve } = require('path')
+const parse = require('minimist')
+
+const defaultRequestHandler = (req, res) => {
+  res.writeHead(302, { 'location': 'https://telegram.org' })
+  res.end()
+}
 
 const help = () => {
   console.log(`Usage: micro-bot [opts] <file>
@@ -36,7 +41,7 @@ if (args.help) {
 const token = args.token || process.env.BOT_TOKEN
 const domain = args.domain || process.env.BOT_DOMAIN
 if (!token) {
-  console.error(`micro-bot: Please supply Bot token`)
+  console.error(`μ-bot: Please supply Bot token`)
   help()
   process.exit(1)
 }
@@ -49,14 +54,14 @@ if (!file) {
     file = packageJson.main || 'index.js'
   } catch (err) {
     if (err.code === 'MODULE_NOT_FOUND') {
-      console.error(`micro-bot: Could not read \`package.json\`: ${err.message}`)
+      console.error(`μ-bot: Could not read \`package.json\`: ${err.message}`)
       process.exit(1)
     }
   }
 }
 
 if (!file) {
-  console.error('micro-bot: Please supply a file.')
+  console.error('μ-bot: Please supply a file with handler.')
   help()
   process.exit(1)
 }
@@ -67,15 +72,27 @@ if (file[0] !== '/') {
 
 require('async-to-gen/register')
 
-let handler
+let botHandler
+let requestHandler
+let tlsOptions
 
 try {
-  handler = require(file)
+  const mod = require(file)
+  botHandler = mod.botHandler || mod
+  requestHandler = mod.requestHandler || defaultRequestHandler
+  tlsOptions = mod.tlsOptions
 } catch (err) {
-  console.error(`micro-bot: Error when importing ${file}: ${err.stack}`)
+  console.error(`μ-bot: Error when importing ${file}: ${err.stack}`)
   process.exit(1)
 }
 
-start(token, handler, domain, args.port, args.host, handler.httpCallback).catch((err) => {
-  console.log(`micro-bot: Failed to start bot: ${err}`)
+const webhookOpts = {
+  domain: domain,
+  port: args.port,
+  host: args.host,
+  tlsOptions: tlsOptions
+}
+
+start(token, botHandler, webhookOpts, requestHandler).catch((err) => {
+  console.log(`μ-bot: Failed to start bot: ${err}`)
 })

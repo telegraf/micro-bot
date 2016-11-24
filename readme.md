@@ -30,8 +30,6 @@ To run the bot with webhook support, provide webhook domain name:
 $ micro-bot -t TOKEN -d yourdoimain.tld echo.js
 ```
 
-**Note: micro-bot supports only http webhooks**
-
 Also you can provide options via environment variables:
 
 * `process.env.BOT_TOKEN` - Bot token
@@ -92,6 +90,7 @@ module.exports = mount('sticker', (ctx) => ctx.reply('👍'))
 ```
 
 ```js
+const { readFileSync } = require('fs')
 const { Composer } = require('micro-bot')
 const app = new Composer()
 
@@ -99,7 +98,31 @@ app.command('/start', async (ctx) => ctx.reply('Welcome!'))
 app.hears('hi', (ctx) => ctx.reply('Hey there!'))
 app.on('sticker', (ctx) => ctx.reply('👍'))
 
+// Export bot handler
 module.exports = app
+
+// Export http handler (optional)
+module.exports.requestHandler = (req, res) => {...}
+
+// Export tls options (optional)
+module.exports.tlsOptions = {
+  key:  readFileSync('server-key.pem'),
+  cert: readFileSync('server-cert.pem')
+}
+
+// Or you can export hash with handlers and options
+module.exports = {
+  botHandler: app,
+  requestHandler:  (req, res, next) => {...},
+  tlsOptions: {
+    key:  readFileSync('server-key.pem'),
+    cert: readFileSync('server-cert.pem'),
+    ca: [ 
+      // This is necessary only if the client uses the self-signed certificate.
+      readFileSync('client-cert.pem') 
+    ]
+  }
+}
 ```
 
 ### Realtime global deployments with [`now`](https://zeit.co/now)
@@ -122,7 +145,7 @@ $ now -e BOT_TOKEN='TOKEN'
 
 Congratulations, your bot is alive! 🎉
 
-#### Example bots
+#### Example μ-bots
 
 * [@uncover_bot](https://telegram.me/uncover_bot): [Source code](https://uncover.now.sh/_src)
 * [@epub2mobi_bot](https://telegram.me/epub2mobi_bot): [Source code](https://epub2mobi.now.sh/_src)
