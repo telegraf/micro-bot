@@ -9,7 +9,7 @@ function start (token, handler, { domain, port, host, tlsOptions }, httpCallback
   bot.use(handler)
   return bot.telegram.getMe()
     .then((botInfo) => {
-      console.log(`Starting ${botInfo.username}...`)
+      console.log(`Starting @${botInfo.username}...`)
       bot.options.username = botInfo.username
       if (typeof domain !== 'string') {
         return bot.telegram.removeWebHook().then(() => bot.startPolling())
@@ -19,9 +19,10 @@ function start (token, handler, { domain, port, host, tlsOptions }, httpCallback
       }
       const secret = `bot/${Math.random().toString(36).slice(2)}`
       bot.startWebHook(`/${secret}`, tlsOptions, port, host, httpCallback)
-      return bot.telegram.setWebHook(`https://${domain}/${secret}`)
+      return bot.telegram
+        .setWebHook(`https://${domain}/${secret}`)
+        .then(() => console.log(`Bot started @ https://${domain}`))
     })
-    .then(() => console.log(`Bot started: https://${domain}`))
 }
 
 module.exports = Object.assign(Telegraf, { start: start })
