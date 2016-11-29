@@ -12,7 +12,11 @@ function start (token, handler, { domain, port, host, tlsOptions }, httpCallback
       console.log(`Starting @${botInfo.username}...`)
       bot.options.username = botInfo.username
       if (typeof domain !== 'string') {
-        return bot.telegram.removeWebHook().then(() => bot.startPolling())
+        return bot.telegram.removeWebHook()
+          .then(() => {
+            bot.startPolling()
+            console.log(`Bot started`)
+          })
       }
       if (domain.startsWith('https://')) {
         domain = url.parse(domain).host
