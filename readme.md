@@ -81,6 +81,26 @@ If you want to do it manually, you can! `micro-bot` is idempotent and should not
 `micro-bot` exclusively supports Node 6.2+ to avoid a big transpilation pipeline. 
 `async-to-gen` is fast and can be distributed with the main `micro-bot` package due to its small size.
 
+### Realtime global deployments with [`now`](https://zeit.co/now)
+
+Wanna deploy your bot in seconds? 
+First, change your `package.json` as in following snippet:
+
+```js
+"main": "index.js",
+"scripts": {
+  "start": "micro-bot -d ${NOW_URL}"
+}
+```
+
+then use `now` to deploy:
+
+```bash
+$ now -e BOT_TOKEN='TOKEN'
+```
+
+Congratulations, your bot is alive! 🎉
+
 ### Advanced Examples
 
 ```js
@@ -124,26 +144,6 @@ module.exports = {
   }
 }
 ```
-
-### Realtime global deployments with [`now`](https://zeit.co/now)
-
-Wanna deploy your bot in seconds? 
-First, change your `package.json` as in following snippet:
-
-```js
-"main": "index.js",
-"scripts": {
-  "start": "micro-bot -d ${NOW_URL}"
-}
-```
-
-then use `now` to deploy:
-
-```bash
-$ now -e BOT_TOKEN='TOKEN'
-```
-
-Congratulations, your bot is alive! 🎉
 
 #### Example μ-bots
 
