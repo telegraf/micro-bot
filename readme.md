@@ -8,52 +8,34 @@
 
 > `micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/) 
 
-## Example
 
-The following example `echo.js` will answer user with important information about everything.
+## Installation
+
+Install from NPM:
+
+```js
+$ npm install micro-bot
+```
+
+**Note**: `micro-bot` requires Node `6.2.0` or later
+
+## Quick start
+
+The following example will answer with important information about everything.
+
+```js
+$ mkdir smart-bot
+$ cd smart-bot
+$ npm init
+$ npm install micro-bot --save
+```
+
+Then write your `index.js`. 
 
 ```js
 module.exports = async function (ctx) {
   await ctx.reply('42')
 }
-```
-
-To run the bot, use the `micro-bot` command:
-
-```bash
-$ micro-bot -t TOKEN echo.js
-```
-
-To run the bot with webhook support, provide webhook domain name:
-
-```bash
-$ micro-bot -t TOKEN -d yourdoimain.tld echo.js
-```
-
-Also you can provide options via environment variables:
-
-* `process.env.BOT_TOKEN` - Bot token
-* `process.env.BOT_DOMAIN` - Webhook domain
-
-```bash
-$ BOT_TOKEN='TOKEN' micro-bot echo.js
-```
-
-## Documentation
-
-`micro-bot` was built on top of [`telegraf`](https://github.com/telegraf/telegraf) libary.
-
-[Telegraf documentation](http://telegraf.js.org).
-
-### Installation
-
-**Note**: `micro-bot` requires Node `6.2.0` or later
-
-Install from NPM:
-
-```js
-$ npm init
-$ npm install micro-bot --save
 ```
 
 Then in your `package.json`:
@@ -65,14 +47,41 @@ Then in your `package.json`:
 }
 ```
 
-Then write your `index.js` (see above for an example). 
-To run your bot run:
+To run the bot, use the `micro-bot` command:
 
 ```bash
-$ npm start
+$ micro-bot -t TOKEN index.js
 ```
 
-### Transpilation
+or
+
+```bash
+$ BOT_TOKEN='TOKEN' npm start
+```
+
+To run the bot with webhook support, provide webhook domain name:
+
+```bash
+$ micro-bot -t TOKEN -d yourdoimain.tld echo.js
+```
+
+Supported environment variables:
+
+* `process.env.BOT_TOKEN` - Bot token
+* `process.env.BOT_DOMAIN` - Webhook domain
+
+#### Example μ-bots
+
+* [`@uncover_bot`](https://telegram.me/uncover_bot) - [Source code](https://uncover.now.sh/_src)
+* [`@epub2mobi_bot`](https://telegram.me/epub2mobi_bot) - [Source code](https://epub2mobi.now.sh/_src)
+
+## Documentation
+
+`micro-bot` was built on top of [`telegraf`](https://github.com/telegraf/telegraf) libary.
+
+[Telegraf documentation](http://telegraf.js.org).
+
+## Transpilation
 
 We use `async-to-gen`, so that the only transformation that happens is converting async and await to generators.
 
@@ -81,13 +90,11 @@ If you want to do it manually, you can! `micro-bot` is idempotent and should not
 `micro-bot` exclusively supports Node 6.2+ to avoid a big transpilation pipeline. 
 `async-to-gen` is fast and can be distributed with the main `micro-bot` package due to its small size.
 
-### Realtime global deployments with [`now`](https://zeit.co/now)
+## Realtime global deployments with [`now`](https://zeit.co/now)
 
-Wanna deploy your bot in seconds? 
-First, change your `package.json` as in following snippet:
+Let's deploy your bot. First, change your `package.json` as in following snippet:
 
 ```js
-"main": "index.js",
 "scripts": {
   "start": "micro-bot -d ${NOW_URL}"
 }
@@ -101,7 +108,7 @@ $ now -e BOT_TOKEN='TOKEN'
 
 Congratulations, your bot is alive! 🎉
 
-### Advanced Examples
+## Advanced Examples
 
 ```js
 const { mount } = require('micro-bot')
@@ -144,8 +151,3 @@ module.exports = {
   }
 }
 ```
-
-#### Example μ-bots
-
-* [@uncover_bot](https://telegram.me/uncover_bot): [Source code](https://uncover.now.sh/_src)
-* [@epub2mobi_bot](https://telegram.me/epub2mobi_bot): [Source code](https://epub2mobi.now.sh/_src)
