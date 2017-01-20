@@ -30,7 +30,7 @@ $ npm init
 $ npm install micro-bot --save
 ```
 
-Then write your `index.js`. 
+Then write your `index.js`.
 
 ```js
 module.exports = async function (ctx) {
@@ -74,6 +74,7 @@ Supported environment variables:
 
 * [`@uncover_bot`](https://telegram.me/uncover_bot) - [Source code](https://uncover.now.sh/_src)
 * [`@epub2mobi_bot`](https://telegram.me/epub2mobi_bot) - [Source code](https://epub2mobi.now.sh/_src)
+* [`@gorchichkabot`](https://bot.gorchichka.com) - [Source code](https://github.com/agudulin/gorchichkabot)
 
 ## Documentation
 
@@ -87,7 +88,7 @@ We use `async-to-gen`, so that the only transformation that happens is convertin
 
 If you want to do it manually, you can! `micro-bot` is idempotent and should not interfere.
 
-`micro-bot` exclusively supports Node 6.2+ to avoid a big transpilation pipeline. 
+`micro-bot` exclusively supports Node 6.2+ to avoid a big transpilation pipeline.
 `async-to-gen` is fast and can be distributed with the main `micro-bot` package due to its small size.
 
 ## Realtime global deployments with [`now`](https://zeit.co/now)
@@ -144,9 +145,9 @@ module.exports = {
   tlsOptions: {
     key:  readFileSync('server-key.pem'),
     cert: readFileSync('server-cert.pem'),
-    ca: [ 
+    ca: [
       // This is necessary only if the client uses the self-signed certificate.
-      readFileSync('client-cert.pem') 
+      readFileSync('client-cert.pem')
     ]
   }
 }
