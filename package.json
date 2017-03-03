@@ -23,9 +23,10 @@
     "micro-bot": "./bin/micro-bot"
   },
   "dependencies": {
-    "async-to-gen": "^1.1.4",
+    "async-to-gen": "^1.3.2",
+    "is-async-supported": "^1.2.0",
     "minimist": "^1.2.0",
-    "telegraf": "^3.6.3"
+    "telegraf": "^3.6.7"
   },
   "devDependencies": {
     "ava": "^0.17.0",
