@@ -70,6 +70,32 @@ Supported environment variables:
 * `process.env.BOT_TOKEN` - Bot token
 * `process.env.BOT_DOMAIN` - Webhook domain
 
+## Deployment
+
+Let's deploy your bot with Realtime global deployments by Zeit.
+
+First, install [`now`](https://zeit.co/now) 
+```js
+$ npm install now -g
+$ now login
+```
+
+Then change your `package.json` as in following snippet:
+
+```js
+"scripts": {
+  "start": "micro-bot -d ${NOW_URL}"
+}
+```
+
+Finally use `now` to deploy:
+
+```bash
+$ now -e BOT_TOKEN='TOKEN'
+```
+
+Congratulations, your bot is alive! 🎉
+
 #### Example μ-bots
 
 * [`@uncover_bot`](https://telegram.me/uncover_bot) - [Source code](https://uncover.now.sh/_src)
@@ -84,30 +110,13 @@ Supported environment variables:
 
 ## Transpilation
 
-We use `async-to-gen`, so that the only transformation that happens is converting async and await to generators.
+We use [is-async-supported](https://github.com/timneutkens/is-async-supported) combined with [async-to-gen](https://github.com/leebyron/async-to-gen),
+so that the we only convert `async` and `await` to generators when needed.
 
 If you want to do it manually, you can! `micro-bot` is idempotent and should not interfere.
 
 `micro-bot` exclusively supports Node 6.2+ to avoid a big transpilation pipeline.
 `async-to-gen` is fast and can be distributed with the main `micro-bot` package due to its small size.
-
-## Realtime global deployments with [`now`](https://zeit.co/now)
-
-Let's deploy your bot. First, change your `package.json` as in following snippet:
-
-```js
-"scripts": {
-  "start": "micro-bot -d ${NOW_URL}"
-}
-```
-
-then use `now` to deploy:
-
-```bash
-$ now -e BOT_TOKEN='TOKEN'
-```
-
-Congratulations, your bot is alive! 🎉
 
 ## Advanced Examples
 
