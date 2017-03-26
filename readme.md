@@ -70,7 +70,7 @@ Supported environment variables:
 * `process.env.BOT_TOKEN` - Bot token
 * `process.env.BOT_DOMAIN` - Webhook domain
 
-## Deployment
+## Deployment to `now`
 
 Let's deploy your bot with Realtime global deployments by Zeit.
 
@@ -80,7 +80,7 @@ $ npm install now -g
 $ now login
 ```
 
-Then change your `package.json` as in following snippet:
+Then change `start` script in `package.json` as in following snippet:
 
 ```js
 "scripts": {
@@ -91,10 +91,46 @@ Then change your `package.json` as in following snippet:
 Finally use `now` to deploy:
 
 ```bash
-$ now -e BOT_TOKEN='TOKEN'
+$ now -e BOT_TOKEN='YOUR BOT TOKEN'
 ```
 
 Congratulations, your bot is alive! 🎉
+
+## Deployment to Heroku
+
+Okay, now we will deploy our bot to Heroku. Whay not?!
+
+First, install [`heroku binaries`](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) and login via console.
+
+Then, init new git repo:
+```bash
+$ git init
+$ heroku create
+```
+
+Then change `start` script in `package.json`:
+
+```js
+"scripts": {
+  "start": "micro-bot -d ${URL}"
+}
+```
+
+Afterwards, save BOT token to Heroku config:
+
+```bash
+$ heroku config:set --app YourAppId BOT_TOKEN='YOUR BOT TOKEN'
+```
+
+Finally use `heroku` to deploy:
+
+```bash
+$ git add index.js package.json
+$ git commit -m 'initial commit'
+$ git push heroku master
+```
+
+Congratulations, your bot is alive! Again.
 
 #### Example μ-bots
 
