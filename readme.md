@@ -50,13 +50,13 @@ Then in your `package.json`:
 To run the bot, use the `micro-bot` command:
 
 ```bash
-$ micro-bot -t TOKEN index.js
+$ BOT_TOKEN='TOKEN' npm start
 ```
 
 or
 
 ```bash
-$ BOT_TOKEN='TOKEN' npm start
+$ micro-bot -t TOKEN index.js
 ```
 
 To run the bot with webhook support, provide webhook domain name:
@@ -98,7 +98,7 @@ Congratulations, your bot is alive! 🎉
 
 ## Deployment to Heroku
 
-Okay, now we will deploy our bot to Heroku. Whay not?!
+Okay, now we will deploy our bot to Heroku. Why not?!
 
 First, install [`heroku binaries`](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) and login via console.
 
@@ -116,7 +116,7 @@ Then change `start` script in `package.json`:
 }
 ```
 
-Afterwards, save BOT token to Heroku config:
+Afterwards, save bot token to Heroku config:
 
 ```bash
 $ heroku config:set --app YourAppId BOT_TOKEN='YOUR BOT TOKEN'
