@@ -22,9 +22,9 @@ function start (token, handler, { domain, port, host, tlsOptions }, httpCallback
         domain = url.parse(domain).host
       }
       const secret = `micro-bot/${Math.random().toString(36).slice(2)}`
-      bot.startWebhook(`/${secret}`, tlsOptions, port, host, httpCallback)
+      bot.startWebhook(`/telegraf/${secret}`, tlsOptions, port, host, httpCallback)
       return bot.telegram
-        .setWebhook(`https://${domain}/${secret}`)
+        .setWebhook(`https://${domain}/telegraf/${secret}`)
         .then(() => log(`Bot started @ https://${domain}`))
     })
 }
