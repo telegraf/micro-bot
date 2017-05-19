@@ -8,6 +8,11 @@
 
 > `micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/) 
 
+## Documentation
+
+`micro-bot` was built on top of [`Telegraf`](https://github.com/telegraf/telegraf) libary.
+
+[Telegraf documentation](http://telegraf.js.org).
 
 ## Installation
 
@@ -33,9 +38,7 @@ $ npm install micro-bot --save
 Then write your `index.js`.
 
 ```js
-module.exports = async function (ctx) {
-  await ctx.reply('42')
-}
+module.exports = ({ reply }) => reply('42')
 ```
 
 Then in your `package.json`:
@@ -138,12 +141,6 @@ Congratulations, your bot is alive! Again.
 * [`@epub2mobi_bot`](https://telegram.me/epub2mobi_bot) - [Source code](https://epub2mobi.now.sh/_src)
 * [`@gorchichkabot`](https://bot.gorchichka.com) - [Source code](https://github.com/agudulin/gorchichkabot)
 
-## Documentation
-
-`micro-bot` was built on top of [`telegraf`](https://github.com/telegraf/telegraf) libary.
-
-[Telegraf documentation](http://telegraf.js.org).
-
 ## Transpilation
 
 We use [is-async-supported](https://github.com/timneutkens/is-async-supported) combined with [async-to-gen](https://github.com/leebyron/async-to-gen),
@@ -157,9 +154,8 @@ If you want to do it manually, you can! `micro-bot` is idempotent and should not
 ## Advanced Examples
 
 ```js
-const { mount } = require('micro-bot')
-
-module.exports = mount('sticker', (ctx) => ctx.reply('👍'))
+const { mount, reply } = require('micro-bot')
+module.exports = mount('sticker', reply('👍'))
 ```
 
 ```js
@@ -167,9 +163,9 @@ const { readFileSync } = require('fs')
 const { Composer } = require('micro-bot')
 const app = new Composer()
 
-app.command('/start', async (ctx) => ctx.reply('Welcome!'))
-app.hears('hi', (ctx) => ctx.reply('Hey there!'))
-app.on('sticker', (ctx) => ctx.reply('👍'))
+app.command('/start', (ctx) => ctx.reply('Welcome!'))
+app.hears('hi', ({ reply }) => reply('Hey there!'))
+app.on('sticker', ({ reply }) => reply('👍'))
 
 // Export bot handler
 module.exports = app
