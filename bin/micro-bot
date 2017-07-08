@@ -15,7 +15,7 @@ const help = () => {
   -t  Bot token
   -d  Webhook domain
   -H  Webhook host [0.0.0.0]
-  -p  Webhook port [3000]
+  -p  Webhook port [$PORT or 3000]
   -h  Show this help message`)
 }
 
@@ -30,7 +30,7 @@ const args = parse(process.argv, {
   boolean: ['h'],
   default: {
     H: '0.0.0.0',
-    p: 3000
+    p: process.env.PORT || 3000
   }
 })
 
