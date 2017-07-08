@@ -75,7 +75,7 @@ Supported environment variables:
 
 ## Deployment to `now`
 
-Let's deploy your bot with Realtime global deployments by Zeit.
+Let's deploy your `micro-bot` with Realtime global deployments by Zeit.
 
 First, install [`now`](https://zeit.co/now) 
 ```js
@@ -101,7 +101,7 @@ Congratulations, your bot is alive! 🎉
 
 ## Deployment to Heroku
 
-Okay, now we will deploy our bot to Heroku. Why not?!
+Okay, now we will deploy our `micro-bot` to Heroku. Why not?!
 
 First, install [`heroku binaries`](https://devcenter.heroku.com/articles/getting-started-with-nodejs#set-up) and login via console.
 
@@ -111,18 +111,19 @@ $ git init
 $ heroku create
 ```
 
+Afterwards, update Heroku config:
+
+```bash
+$ heroku config:set --app YourAppId BOT_TOKEN='YOUR BOT TOKEN'
+$ heroku config:set --app YourAppId BOT_DOMAIN='https://YourAppId.herokuappp.com'
+```
+
 Then change `start` script in `package.json`:
 
 ```js
 "scripts": {
-  "start": "micro-bot -d ${URL}"
+  "start": "micro-bot -p ${PORT}"
 }
-```
-
-Afterwards, save bot token to Heroku config:
-
-```bash
-$ heroku config:set --app YourAppId BOT_TOKEN='YOUR BOT TOKEN'
 ```
 
 Finally use `heroku` to deploy:
