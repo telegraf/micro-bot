@@ -13,6 +13,7 @@ function start (token, handler, { domain, port, host, tlsOptions }, httpCallback
     .then((botInfo) => {
       log(`Starting @${botInfo.username}`)
       bot.options.username = botInfo.username
+      bot.context.botInfo = botInfo
       if (typeof domain !== 'string') {
         return bot.telegram.deleteWebhook()
           .then(() => bot.startPolling())
