@@ -65,7 +65,7 @@ $ micro-bot -t TOKEN index.js
 To run the bot with webhook support, provide webhook domain name:
 
 ```bash
-$ micro-bot -t TOKEN -d yourdoimain.tld echo.js
+$ micro-bot -t TOKEN -d yourdomain.tld echo.js
 ```
 
 Supported environment variables:
