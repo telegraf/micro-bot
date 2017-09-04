@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
+const { existsSync } = require('fs')
 const path = require('path')
 const parse = require('minimist')
+const dotenv = require('dotenv')
 const isAsyncSupported = require('is-async-supported')
 
 const defaultRequestHandler = (req, res) => {
@@ -16,6 +18,7 @@ const help = () => {
   -d  Webhook domain
   -H  Webhook host [0.0.0.0]
   -p  Webhook port [$PORT or 3000]
+  -e  Load env vars from file. [.env]'
   -h  Show this help message`)
 }
 
@@ -25,7 +28,8 @@ const args = parse(process.argv, {
     d: 'domain',
     H: 'host',
     h: 'help',
-    p: 'port'
+    p: 'port',
+    e: 'dotenv'
   },
   boolean: ['h'],
   default: {
@@ -38,6 +42,17 @@ if (args.help) {
   help()
   process.exit(0)
 }
+
+if (args.dotenv) {
+  const dotenvFileName = typeof args.dotenv === 'string' ? args.dotenv : '.env'
+  if (!existsSync(dotenvFileName)) {
+    console.error(`μ-bot: -e flag is set but ${dotenvFileName} file is missing`)
+    help()
+    process.exit(1)
+  }
+  dotenv.config({path: dotenvFileName})
+}
+
 const token = args.token || process.env.BOT_TOKEN
 const domain = args.domain || process.env.BOT_DOMAIN
 if (!token) {
