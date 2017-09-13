@@ -153,6 +153,7 @@ Congratulations, your bot is alive! Again.
 * [`@uncover_bot`](https://telegram.me/uncover_bot) - [Source code](https://uncover.now.sh/_src)
 * [`@epub2mobi_bot`](https://telegram.me/epub2mobi_bot) - [Source code](https://epub2mobi.now.sh/_src)
 * [`@gorchichkabot`](https://bot.gorchichka.com) - [Source code](https://github.com/agudulin/gorchichkabot)
+* [`@aloudbot`](https://telegram.me/aloudbot) - [Source code](https://github.com/shrynx/aloudbot)
 
 ## Transpilation
 
