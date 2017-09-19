@@ -185,15 +185,6 @@ app.on('sticker', ({ reply }) => reply('👍'))
 // Export bot handler
 module.exports = app
 
-// Export http handler (optional)
-module.exports.requestHandler = (req, res) => {...}
-
-// Export tls options (optional)
-module.exports.tlsOptions = {
-  key:  readFileSync('server-key.pem'),
-  cert: readFileSync('server-cert.pem')
-}
-
 // Or you can export hash with handlers and options
 module.exports = {
   initialize: (bot) => {...},
