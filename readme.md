@@ -196,6 +196,7 @@ module.exports.tlsOptions = {
 
 // Or you can export hash with handlers and options
 module.exports = {
+  initialize: (bot) => {...},
   botHandler: app,
   requestHandler:  (req, res, next) => {...},
   tlsOptions: {

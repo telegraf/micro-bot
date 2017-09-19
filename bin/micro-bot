@@ -6,11 +6,6 @@ const parse = require('minimist')
 const dotenv = require('dotenv')
 const isAsyncSupported = require('is-async-supported')
 
-const defaultRequestHandler = (req, res) => {
-  res.writeHead(302, { 'location': 'https://telegram.org' })
-  res.end()
-}
-
 const help = () => {
   console.log(`Usage: micro-bot [opts] <file>
 
@@ -54,7 +49,6 @@ if (args.dotenv) {
 }
 
 const token = args.token || process.env.BOT_TOKEN
-const domain = args.domain || process.env.BOT_DOMAIN
 if (!token) {
   console.error(`μ-bot: Please supply Bot token`)
   help()
@@ -85,25 +79,12 @@ if (file[0] !== '/') {
   file = path.resolve(process.cwd(), file)
 }
 
-let botHandler
-let requestHandler
-let tlsOptions
-
+let botModule
 try {
-  const mod = require(file)
-  botHandler = mod.botHandler || mod
-  requestHandler = mod.requestHandler || defaultRequestHandler
-  tlsOptions = mod.tlsOptions
+  botModule = require(file)
 } catch (err) {
   console.error(`μ-bot: Error when importing ${file}: ${err.stack}`)
   process.exit(1)
-}
-
-const webhookOpts = {
-  domain: domain,
-  port: args.port,
-  host: args.host,
-  tlsOptions: tlsOptions
 }
 
 if (!isAsyncSupported()) {
@@ -111,7 +92,6 @@ if (!isAsyncSupported()) {
   const pathSep = process.platform === 'win32' ? '\\\\' : '/'
   const directoryName = path.parse(path.join(__dirname, '..')).base
   const fileDirectoryPath = path.parse(file).dir
-
   asyncToGen({
     includes: new RegExp(`.*${directoryName}?${pathSep}(lib|bin)|${fileDirectoryPath}.*`),
     excludes: null,
@@ -120,7 +100,16 @@ if (!isAsyncSupported()) {
 }
 
 const { start } = require('../')
+const domain = args.domain || process.env.BOT_DOMAIN
 
-start(token, botHandler, webhookOpts, requestHandler).catch((err) => {
-  console.log(`μ-bot: Failed to start bot: ${err}`)
+const botOptions = {
+  token,
+  domain,
+  botModule,
+  port: args.port,
+  host: args.host
+}
+
+start(botOptions).catch((err) => {
+  console.warn(`μ-bot: Failed to start bot: ${err}`)
 })
