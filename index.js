@@ -5,6 +5,8 @@ function log (message) {
   console.log(`μ-bot :: ${message}`)
 }
 
+const defaultInit = () => Promise.resolve()
+
 const defaultRequestHandler = (req, res) => {
   res.writeHead(302, { 'location': 'https://telegram.org' })
   res.end()
@@ -12,7 +14,7 @@ const defaultRequestHandler = (req, res) => {
 
 function start ({ token, domain, botModule, port, host }) {
   const bot = new Telegraf(token)
-  const init = botModule.initialize || Promise.resolve
+  const init = botModule.initialize || defaultInit
   bot.catch((err) => log(`Error\n${err}`))
   bot.use(botModule.botHandler || botModule)
   return bot.telegram.getMe()
