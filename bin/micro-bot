@@ -14,7 +14,8 @@ const help = () => {
   -H  Webhook host [0.0.0.0]
   -p  Webhook port [$PORT or 3000]
   -e  Load env vars from file. [.env]'
-  -h  Show this help message`)
+  -h  Show this help message
+  -v  Show version information`)
 }
 
 const args = parse(process.argv, {
@@ -23,10 +24,11 @@ const args = parse(process.argv, {
     d: 'domain',
     H: 'host',
     h: 'help',
+    v: 'version',
     p: 'port',
     e: 'dotenv'
   },
-  boolean: ['h'],
+  boolean: ['h', 'v'],
   default: {
     H: '0.0.0.0',
     p: process.env.PORT || 3000
@@ -35,6 +37,12 @@ const args = parse(process.argv, {
 
 if (args.help) {
   help()
+  process.exit(0)
+}
+
+if (args.version) {
+  const packageData = require('../package.json')
+  console.log(`v${packageData.version}`)
   process.exit(0)
 }
 
@@ -70,7 +78,7 @@ if (!file) {
 }
 
 if (!file) {
-  console.error('μ-bot: Please supply a file with handler.')
+  console.error('μ-bot: Please supply a file with bot handler.')
   help()
   process.exit(1)
 }
