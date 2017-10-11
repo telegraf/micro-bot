@@ -1,6 +1,6 @@
 {
   "name": "micro-bot",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "description": "Async Telegram microbots",
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
@@ -27,7 +27,7 @@
     "dotenv": "^4.0.0",
     "is-async-supported": "^1.2.0",
     "minimist": "^1.2.0",
-    "telegraf": "^3.12.0"
+    "telegraf": "^3.13.0"
   },
   "devDependencies": {
     "ava": "^0.22.0",
