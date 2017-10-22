@@ -127,7 +127,7 @@ Afterwards, update Heroku config:
 
 ```bash
 $ heroku config:set --app YourAppId BOT_TOKEN='YOUR BOT TOKEN'
-$ heroku config:set --app YourAppId BOT_DOMAIN='https://YourAppId.herokuappp.com'
+$ heroku config:set --app YourAppId BOT_DOMAIN='https://YourAppId.herokuapp.com'
 ```
 
 Then change `start` script in `package.json`:
