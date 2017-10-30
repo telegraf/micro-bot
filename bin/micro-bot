@@ -4,7 +4,7 @@ const { existsSync } = require('fs')
 const path = require('path')
 const parse = require('minimist')
 const dotenv = require('dotenv')
-const isAsyncSupported = require('is-async-supported')
+const { start } = require('../')
 
 const help = () => {
   console.log(`Usage: micro-bot [opts] <file>
@@ -20,13 +20,13 @@ const help = () => {
 
 const args = parse(process.argv, {
   alias: {
-    t: 'token',
     d: 'domain',
-    H: 'host',
+    e: 'dotenv',
     h: 'help',
-    v: 'version',
+    H: 'host',
     p: 'port',
-    e: 'dotenv'
+    t: 'token',
+    v: 'version'
   },
   boolean: ['h', 'v'],
   default: {
@@ -95,19 +95,6 @@ try {
   process.exit(1)
 }
 
-if (!isAsyncSupported()) {
-  const asyncToGen = require('async-to-gen/register')
-  const pathSep = process.platform === 'win32' ? '\\\\' : '/'
-  const directoryName = path.parse(path.join(__dirname, '..')).base
-  const fileDirectoryPath = path.parse(file).dir
-  asyncToGen({
-    includes: new RegExp(`.*${directoryName}?${pathSep}(lib|bin)|${fileDirectoryPath}.*`),
-    excludes: null,
-    sourceMaps: false
-  })
-}
-
-const { start } = require('../')
 const domain = args.domain || process.env.BOT_DOMAIN
 
 const botOptions = {
@@ -119,5 +106,5 @@ const botOptions = {
 }
 
 start(botOptions).catch((err) => {
-  console.warn(`μ-bot: Failed to start bot: ${err}`)
+  console.warn(`μ-bot: Failed to start: ${err}`)
 })

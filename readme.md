@@ -12,7 +12,7 @@
 
 `micro-bot` was built on top of [`Telegraf`](https://github.com/telegraf/telegraf) libary.
 
-[Telegraf documentation](http://telegraf.js.org).
+[Telegraf API documentation](http://telegraf.js.org).
 
 ## Installation
 
@@ -22,7 +22,7 @@ Install from NPM:
 $ npm install micro-bot
 ```
 
-**Note**: `micro-bot` requires Node `6.2.0` or later
+**Note**: `micro-bot` requires Node `8.5.0` or later
 
 ## Quick start
 
@@ -150,21 +150,11 @@ Congratulations, your bot is alive! Again.
 
 #### Example μ-bots
 
-* [Glitch example](https://glitch.com/edit/#!/dashing-light)
+* [ 🔥 Glitch example](https://glitch.com/edit/#!/dashing-light)
 * [`@uncover_bot`](https://telegram.me/uncover_bot) - [Source code](https://uncover.now.sh/_src)
 * [`@epub2mobi_bot`](https://telegram.me/epub2mobi_bot) - [Source code](https://epub2mobi.now.sh/_src)
 * [`@gorchichkabot`](https://bot.gorchichka.com) - [Source code](https://github.com/agudulin/gorchichkabot)
 * [`@aloudbot`](https://telegram.me/aloudbot) - [Source code](https://github.com/shrynx/aloudbot)
-
-## Transpilation
-
-We use [is-async-supported](https://github.com/timneutkens/is-async-supported) combined with [async-to-gen](https://github.com/leebyron/async-to-gen),
-so that the we only convert `async` and `await` to generators when needed.
-
-If you want to do it manually, you can! `micro-bot` is idempotent and should not interfere.
-
-`micro-bot` exclusively supports Node 6.2+ to avoid a big transpilation pipeline.
-`async-to-gen` is fast and can be distributed with the main `micro-bot` package due to its small size.
 
 ## Advanced Examples
 
