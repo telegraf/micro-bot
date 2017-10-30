@@ -24,6 +24,22 @@ $ npm install micro-bot
 
 **Note**: `micro-bot` requires Node `8.5.0` or later
 
+## Scaffolding
+
+If you have installed `yarn^0.24` or `npm^5` you can use [`create-bot`](https://github.com/telegraf/create-bot) scaffolding tool:
+
+```bash
+npx create-bot smart-bot
+cd smart-bot
+```
+
+Or using `yarn`:
+
+```bash
+yarn create bot smart-bot
+cd smart-bot
+```
+
 ## Quick start
 
 The following example will answer with important information about everything.
