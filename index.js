@@ -1,4 +1,7 @@
 const Telegraf = require('telegraf')
+const Stage = require('telegraf/stage')
+const Scene = require('telegraf/scenes/base')
+const WizardScene = require('telegraf/scenes/wizard')
 const url = require('url')
 
 function log (message) {
@@ -41,4 +44,4 @@ function start ({ token, domain, botModule, port, host }) {
     })
 }
 
-module.exports = Object.assign(Telegraf, { start: start })
+module.exports = Object.assign(Telegraf, { Stage, Scene, WizardScene, start: start })

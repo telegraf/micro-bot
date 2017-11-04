@@ -6,8 +6,6 @@
 # μ-bot
 > 🤖 Async Telegram microbots
 
-> `micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/) 
-
 ## Documentation
 
 `micro-bot` was built on top of [`Telegraf`](https://github.com/telegraf/telegraf) libary.
@@ -206,3 +204,31 @@ module.exports = {
   }
 }
 ```
+
+### Stages & Scenes
+
+```js
+const { Composer, Stage, Scene, session } = require('micro-bot')
+
+// Greeter scene
+const greeter = new Scene('greeter')
+greeter.enter((ctx) => ctx.reply('Hi'))
+greeter.leave((ctx) => ctx.reply('Buy'))
+greeter.hears(/hi/gi, (ctx) => ctx.scene.leave())
+greeter.on('message', (ctx) => ctx.reply('Send `hi`'))
+
+const stage = new Stage()
+stage.register(greeter)
+
+const bot = new Composer()
+bot.use(session())
+bot.use(stage.middleware())
+bot.command('greeter', (ctx) => ctx.scene.enter('greeter'))
+bot.command('cancel', (ctx) => ctx.scene.leave())
+module.exports = bot
+
+```
+
+## Credits
+
+`micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/) 
