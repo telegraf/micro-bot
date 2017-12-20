@@ -1,7 +1,7 @@
 {
   "name": "micro-bot",
   "version": "2.1.0",
-  "description": "Async Telegram microbots",
+  "description": "Zero-configuration Telegram bot runner",
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
   "homepage": "https://github.com/telegraf/micro-bot#readme",
@@ -25,7 +25,7 @@
   "dependencies": {
     "dotenv": "^4.0.0",
     "minimist": "^1.2.0",
-    "telegraf": "^3.15.3"
+    "telegraf": "^3.17.2"
   },
   "devDependencies": {
     "eslint": "^4.4.1",
