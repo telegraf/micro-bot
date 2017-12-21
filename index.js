@@ -9,7 +9,7 @@ function log (message) {
 }
 
 function logError (error) {
-  console.error('μ-bot ::', error)
+  console.error('μ-bot :: Error', error)
 }
 
 const defaultInit = () => Promise.resolve()

@@ -1,6 +1,6 @@
 {
   "name": "micro-bot",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Zero-configuration Telegram bot runner",
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
