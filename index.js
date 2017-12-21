@@ -8,6 +8,10 @@ function log (message) {
   console.log(`μ-bot :: ${message}`)
 }
 
+function logError (error) {
+  console.error('μ-bot ::', error)
+}
+
 const defaultInit = () => Promise.resolve()
 
 const defaultRequestHandler = (req, res) => {
@@ -18,7 +22,7 @@ const defaultRequestHandler = (req, res) => {
 function start ({ token, domain, botModule, port, host }) {
   const bot = new Telegraf(token)
   const init = botModule.initialize || defaultInit
-  bot.catch((err) => log(`Error\n${err}`))
+  bot.catch(logError)
   bot.use(botModule.botHandler || botModule)
   return bot.telegram.getMe()
     .then((botInfo) => {
