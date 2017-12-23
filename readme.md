@@ -8,7 +8,7 @@
 
 ## Documentation
 
-`micro-bot` was built on top of [`Telegraf`](https://github.com/telegraf/telegraf) libary.
+`micro-bot` was built on top of [`Telegraf`](https://github.com/telegraf/telegraf) library.
 
 [Telegraf API documentation](http://telegraf.js.org).
 
@@ -16,7 +16,7 @@
 
 Install from NPM:
 
-```js
+```bash
 $ npm install micro-bot
 ```
 
@@ -27,22 +27,22 @@ $ npm install micro-bot
 If you have installed `yarn^0.24` or `npm^5` you can use [`create-bot`](https://github.com/telegraf/create-bot) scaffolding tool:
 
 ```bash
-npx create-bot smart-bot
-cd smart-bot
+$ npx create-bot smart-bot
+$ cd smart-bot
 ```
 
 Or using `yarn`:
 
 ```bash
-yarn create bot smart-bot
-cd smart-bot
+$ yarn create bot smart-bot
+$ cd smart-bot
 ```
 
 ## Quick start
 
 The following example will answer with important information about everything.
 
-```js
+```bash
 $ mkdir smart-bot
 $ cd smart-bot
 $ npm init
@@ -103,17 +103,17 @@ module.exports = (ctx) => {
 
 Let's deploy your `micro-bot` with Realtime global deployments by Zeit.
 
-First, install [`now`](https://zeit.co/now) 
-```js
+First, install [`now`](https://zeit.co/now)
+```bash
 $ npm install now -g
 $ now login
 ```
 
-Then change `start` script in `package.json` as in following snippet:
+Then add `now-start` script in `package.json` as in following snippet:
 
 ```js
 "scripts": {
-  "start": "micro-bot -d ${NOW_URL}"
+  "now-start": "micro-bot -d ${NOW_URL}"
 }
 ```
 
@@ -144,15 +144,13 @@ $ heroku config:set --app YourAppId BOT_TOKEN='YOUR BOT TOKEN'
 $ heroku config:set --app YourAppId BOT_DOMAIN='https://YourAppId.herokuapp.com'
 ```
 
-Then change `start` script in `package.json`:
+Then add `Procfile` into the root of your project, with one line:
 
-```js
-"scripts": {
-  "start": "micro-bot -p ${PORT}"
-}
+```Procfile
+web: micro-bot -p $PORT
 ```
 
-Finally use `heroku` to deploy:
+Finally use git to deploy:
 
 ```bash
 $ git add index.js package.json
@@ -231,4 +229,4 @@ module.exports = bot
 
 ## Credits
 
-`micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/) 
+`micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/)
