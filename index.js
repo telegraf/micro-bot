@@ -13,11 +13,7 @@ function logError (error) {
 }
 
 const defaultInit = () => Promise.resolve()
-
-const defaultRequestHandler = (req, res) => {
-  res.writeHead(302, { 'location': 'https://telegram.org' })
-  res.end()
-}
+const defaultRequestHandler = (req, res) => res.end()
 
 function start ({ token, domain, botModule, port, host }) {
   const bot = new Telegraf(token)
