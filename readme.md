@@ -193,6 +193,11 @@ module.exports = {
   initialize: (bot) => {...},
   botHandler: app,
   requestHandler:  (req, res, next) => {...},
+  options: {
+    telegram: {
+      agent: new HttpsProxyAgent('proxy url')
+    }
+  },
   tlsOptions: {
     key:  readFileSync('server-key.pem'),
     cert: readFileSync('server-cert.pem'),
@@ -230,4 +235,4 @@ module.exports = bot
 
 ## Credits
 
-`micro-bot` is highly inspired by [`micro`](https://github.com/zeit/micro/)
+`micro-bot` is highly inspired by [`Micro`](https://github.com/zeit/micro/)
