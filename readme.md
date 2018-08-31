@@ -226,7 +226,7 @@ stage.register(greeter)
 
 const bot = new Composer()
 bot.use(session())
-bot.use(stage.middleware())
+bot.use(stage)
 bot.command('greeter', (ctx) => ctx.scene.enter('greeter'))
 bot.command('cancel', (ctx) => ctx.scene.leave())
 module.exports = bot

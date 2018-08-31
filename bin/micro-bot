@@ -14,6 +14,7 @@ const help = () => {
   -H  Webhook host [0.0.0.0]
   -p  Webhook port [$PORT or 3000]
   -e  Load env vars from file. [.env]'
+  -s  Silent mode
   -h  Show this help message
   -v  Show version information`)
 }
@@ -25,10 +26,11 @@ const args = parse(process.argv, {
     h: 'help',
     H: 'host',
     p: 'port',
+    s: 'silent',
     t: 'token',
     v: 'version'
   },
-  boolean: ['h', 'v'],
+  boolean: ['h', 'v', 's'],
   default: {
     H: '0.0.0.0',
     p: process.env.PORT || 3000
@@ -53,7 +55,7 @@ if (args.dotenv) {
     help()
     process.exit(1)
   }
-  dotenv.config({path: dotenvFileName})
+  dotenv.config({ path: dotenvFileName })
 }
 
 const token = args.token || process.env.BOT_TOKEN

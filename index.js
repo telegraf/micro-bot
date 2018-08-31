@@ -4,15 +4,16 @@ const Scene = require('telegraf/scenes/base')
 const WizardScene = require('telegraf/scenes/wizard')
 const url = require('url')
 
-const log = (message) => console.log(`μ-bot :: ${message}`)
-const logError = (error) => console.error('μ-bot :: Error', error)
 const defaultInit = () => Promise.resolve()
 const defaultRequestHandler = (req, res) => res.end()
 
-function start ({ token, domain, botModule, port, host }) {
+function start ({ token, domain, botModule, port, host, silent }) {
+  const log = silent
+    ? () => {}
+    : (message) => console.log(`μ-bot: ${message}`)
   const bot = new Telegraf(token, botModule.options)
   const init = botModule.initialize || defaultInit
-  bot.catch(logError)
+  bot.catch((err) => console.error('μ-bot: Unhandled error', err))
   bot.use(botModule.botHandler || botModule)
   return bot.telegram.getMe()
     .then((botInfo) => {
