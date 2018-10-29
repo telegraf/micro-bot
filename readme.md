@@ -109,14 +109,6 @@ $ npm install now -g
 $ now login
 ```
 
-Then add `now-start` script in `package.json` as in following snippet:
-
-```js
-"scripts": {
-  "now-start": "micro-bot -d ${NOW_URL}"
-}
-```
-
 Finally use `now` to deploy:
 
 ```bash
