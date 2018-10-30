@@ -1,6 +1,6 @@
 {
   "name": "micro-bot",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Zero-configuration Telegram bot runner",
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
@@ -25,13 +25,13 @@
   "dependencies": {
     "dotenv": "^6.0.0",
     "minimist": "^1.2.0",
-    "telegraf": "^3.24.0"
+    "telegraf": "^3.25.0"
   },
   "devDependencies": {
     "eslint": "^5.4.0",
     "eslint-config-standard": "^12.0.0",
     "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-node": "^8.0.0",
     "eslint-plugin-promise": "^4.0.0",
     "eslint-plugin-standard": "^4.0.0"
   },

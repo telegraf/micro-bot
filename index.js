@@ -2,7 +2,7 @@ const Telegraf = require('telegraf')
 const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const WizardScene = require('telegraf/scenes/wizard')
-const url = require('url')
+const { URL } = require('url')
 
 const defaultInit = () => Promise.resolve()
 const defaultRequestHandler = (req, res) => res.end()
@@ -29,7 +29,8 @@ function start ({ token, domain, botModule, port, host, silent }) {
           .then(() => log(`Bot started`))
       }
       if (domain.startsWith('https://') || domain.startsWith('http://')) {
-        domain = url.parse(domain).host
+        const webhookUrl = new URL(domain)
+        domain = webhookUrl.host
       }
       const secret = `micro-bot/${Math.random().toString(36).slice(2)}`
       bot.startWebhook(`/telegraf/${secret}`, botModule.tlsOptions, port, host, botModule.requestHandler || defaultRequestHandler)
