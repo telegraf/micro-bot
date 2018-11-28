@@ -148,8 +148,6 @@ $ git commit -m 'initial commit'
 $ git push heroku master
 ```
 
-Congratulations, your bot is alive! Again.
-
 #### Example μ-bots
 
 * [ 🔥 Glitch example](https://glitch.com/edit/#!/dashing-light)
@@ -168,21 +166,25 @@ module.exports = mount('sticker', reply('👍'))
 ```js
 const { readFileSync } = require('fs')
 const { Composer } = require('micro-bot')
-const app = new Composer()
+const bot = new Composer()
 
-app.start((ctx) => ctx.reply('Welcome'))
-app.help((ctx) => ctx.reply('Help message'))
-app.hears('hi', ({ reply }) => reply('Hello'))
-app.on('sticker', ({ reply }) => reply('👍'))
+bot.start((ctx) => ctx.reply('Welcome'))
+bot.help((ctx) => ctx.reply('Help message'))
+bot.hears('hi', ({ reply }) => reply('Hello'))
+bot.on('sticker', ({ reply }) => reply('👍'))
 
 // Export bot handler
-module.exports = app
+module.exports = bot
 
 // Or you can export hash with handlers and options
 module.exports = {
-  initialize: (bot) => {...},
-  botHandler: app,
-  requestHandler:  (req, res, next) => {...},
+  bot: bot,
+  init: (bot) => {
+    console.log('Bot initialization hook')
+  },
+  server: (req, res, next) => {
+    console.log('Http request hook')
+  },
   options: {
     telegram: {
       agent: new HttpsProxyAgent('proxy url')

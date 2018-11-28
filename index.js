@@ -12,9 +12,9 @@ function start ({ token, domain, botModule, port, host, silent }) {
     ? () => {}
     : (message) => console.log(`μ-bot: ${message}`)
   const bot = new Telegraf(token, botModule.options)
-  const init = botModule.initialize || defaultInit
+  const init = botModule.init || botModule.initialize || defaultInit
   bot.catch((err) => console.error('μ-bot: Unhandled error', err))
-  bot.use(botModule.botHandler || botModule)
+  bot.use(botModule.bot || botModule.botHandler || botModule)
   return bot.telegram.getMe()
     .then((botInfo) => {
       log(`Starting @${botInfo.username}`)
@@ -33,7 +33,7 @@ function start ({ token, domain, botModule, port, host, silent }) {
         domain = webhookUrl.host
       }
       const secret = `micro-bot/${Math.random().toString(36).slice(2)}`
-      bot.startWebhook(`/telegraf/${secret}`, botModule.tlsOptions, port, host, botModule.requestHandler || defaultRequestHandler)
+      bot.startWebhook(`/telegraf/${secret}`, botModule.tlsOptions, port, host, botModule.server || botModule.requestHandler || defaultRequestHandler)
       return bot.telegram
         .setWebhook(`https://${domain}/telegraf/${secret}`)
         .then(() => log(`Bot started @ https://${domain}`))
