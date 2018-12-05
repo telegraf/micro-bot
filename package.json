@@ -1,6 +1,6 @@
 {
   "name": "micro-bot",
-  "version": "2.5.2",
+  "version": "2.5.3",
   "description": "Zero-configuration Telegram bot runner",
   "author": "Vitaly Domnikov <oss@vitaly.codes>",
   "license": "MIT",
@@ -25,7 +25,7 @@
   "dependencies": {
     "dotenv": "^6.0.0",
     "minimist": "^1.2.0",
-    "telegraf": "^3.25.1"
+    "telegraf": "^3.25.4"
   },
   "devDependencies": {
     "eslint": "^5.4.0",

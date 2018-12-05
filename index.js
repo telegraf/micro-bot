@@ -4,12 +4,16 @@ const Scene = require('telegraf/scenes/base')
 const WizardScene = require('telegraf/scenes/wizard')
 
 const defaultInit = () => Promise.resolve()
-const defaultCb = (req, res) => res.end()
+const defaultCb = (req, res) => {
+  res.statusCode = 404
+  res.end()
+}
 
-function start ({ token, domain, botModule, port, host, silent }) {
-  const webhook = typeof domain === 'string'
+function start ({ token, domain, hookPath, botModule, port, host, silent }) {
+  const webhook = typeof domain === 'string' || typeof hookPath === 'string'
     ? {
       domain,
+      hookPath,
       port,
       host,
       tlsOptions: botModule.tlsOptions,
@@ -21,7 +25,7 @@ function start ({ token, domain, botModule, port, host, silent }) {
   bot.catch((err) => console.error('μ-bot: Unhandled error', err))
   bot.use(botModule.bot || botModule.botHandler || botModule)
   return init(bot)
-    .then(() => bot.boot({ webhook }))
+    .then(() => bot.launch({ webhook }))
     .then(() => !silent && console.log(`μ-bot: Bot started`))
 }
 
