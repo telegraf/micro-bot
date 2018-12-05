@@ -85,18 +85,6 @@ Supported environment variables:
 * `process.env.BOT_TOKEN` - Bot token
 * `process.env.BOT_DOMAIN` - Webhook domain
 
-## Telegraf context
-
-`micro-bot` automatically fetch Bot info from telegram servers at start.
-
-You can obtain it from update context:
-
-```js
-module.exports = (ctx) => {
-  return ctx.reply(`Hey, my name is ${ctx.botInfo.first_name} ${ctx.botInfo.last_name}`)
-}
-```
-
 ## Deployment to `now`
 
 Let's deploy your `micro-bot` with Realtime global deployments by Zeit.

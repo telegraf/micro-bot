@@ -2,42 +2,27 @@ const Telegraf = require('telegraf')
 const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const WizardScene = require('telegraf/scenes/wizard')
-const { URL } = require('url')
 
 const defaultInit = () => Promise.resolve()
-const defaultRequestHandler = (req, res) => res.end()
+const defaultCb = (req, res) => res.end()
 
 function start ({ token, domain, botModule, port, host, silent }) {
-  const log = silent
-    ? () => {}
-    : (message) => console.log(`μ-bot: ${message}`)
+  const webhook = typeof domain === 'string'
+    ? {
+      domain,
+      port,
+      host,
+      tlsOptions: botModule.tlsOptions,
+      cb: botModule.server || botModule.requestHandler || defaultCb
+    }
+    : null
   const bot = new Telegraf(token, botModule.options)
   const init = botModule.init || botModule.initialize || defaultInit
   bot.catch((err) => console.error('μ-bot: Unhandled error', err))
   bot.use(botModule.bot || botModule.botHandler || botModule)
-  return bot.telegram.getMe()
-    .then((botInfo) => {
-      log(`Starting @${botInfo.username}`)
-      bot.options.username = botInfo.username
-      bot.context.botInfo = botInfo
-      return init(bot)
-    })
-    .then(() => {
-      if (typeof domain !== 'string') {
-        return bot.telegram.deleteWebhook()
-          .then(() => bot.startPolling())
-          .then(() => log(`Bot started`))
-      }
-      if (domain.startsWith('https://') || domain.startsWith('http://')) {
-        const webhookUrl = new URL(domain)
-        domain = webhookUrl.host
-      }
-      const secret = `micro-bot/${Math.random().toString(36).slice(2)}`
-      bot.startWebhook(`/telegraf/${secret}`, botModule.tlsOptions, port, host, botModule.server || botModule.requestHandler || defaultRequestHandler)
-      return bot.telegram
-        .setWebhook(`https://${domain}/telegraf/${secret}`)
-        .then(() => log(`Bot started @ https://${domain}`))
-    })
+  return init(bot)
+    .then(() => bot.boot({ webhook }))
+    .then(() => !silent && console.log(`μ-bot: Bot started`))
 }
 
 module.exports = Object.assign(Telegraf, { Stage, Scene, WizardScene, start: start })

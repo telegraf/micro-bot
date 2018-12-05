@@ -10,7 +10,7 @@ const help = () => {
   console.log(`Usage: micro-bot [opts] <file>
 
   -t  Bot token
-  -d  Webhook domain
+  -d  Webhook domain [$BOT_DOMAIN or $NOW_URL]
   -H  Webhook host [0.0.0.0]
   -p  Webhook port [$PORT or 3000]
   -e  Load env vars from file. [.env]'
