@@ -3,7 +3,7 @@ const Stage = require('telegraf/stage')
 const Scene = require('telegraf/scenes/base')
 const WizardScene = require('telegraf/scenes/wizard')
 
-const defaultInit = () => Promise.resolve()
+const defaultInit = (mbot) => new Promise(resolve => resolve(bot.telegram = mbot.telegram))
 const defaultCb = (req, res) => {
   res.statusCode = 404
   res.end()
