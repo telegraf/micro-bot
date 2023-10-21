@@ -1,3 +1,5 @@
+# ⚠️ This package is deprecated. Use [telegraf](https://github.com/telegraf/telegraf)'s builtin CLI instead.
+
 [![NPM Version](https://img.shields.io/npm/v/micro-bot.svg?style=flat-square)](https://www.npmjs.com/package/micro-bot)
 [![node](https://img.shields.io/node/v/micro-bot.svg?style=flat-square)](https://www.npmjs.com/package/micro-bot)
 [![Build Status](https://img.shields.io/travis/telegraf/micro-bot.svg?branch=master&style=flat-square)](https://travis-ci.org/telegraf/micro-bot)
